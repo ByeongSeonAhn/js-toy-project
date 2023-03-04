@@ -1,4 +1,4 @@
-;(function () {
+; (function () {
   'use strict'
 
   const get = function (target) {
@@ -8,19 +8,23 @@
   let currentPage = 1
   let total = 10
   const limit = 10
-  const end = 100
+  const end = 100  //총갯수
 
   const $posts = get('.posts')
   const $loader = get('.loader')
 
+  // 데이터 로딩이 완료되면 hide
   const hideLoader = () => {
     $loader.classList.remove('show')
   }
 
+  // 데이터 로딩시 불러오는 css
   const showLoader = () => {
     $loader.classList.add('show')
   }
 
+
+  //포스트 보여주는 CSS
   const showPosts = (posts) => {
     posts.forEach((post) => {
       const $post = document.createElement('div')
@@ -36,6 +40,7 @@
     })
   }
 
+  //포스트 요청 
   const getPosts = async (page, limit) => {
     const API_URL = `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`
     const response = await fetch(API_URL)
@@ -45,22 +50,24 @@
     return await response.json()
   }
 
+  //포스트 로딩
   const loadPosts = async (page, limit) => {
     showLoader()
     try {
-      const response = await getPosts(page, limit)
+      const response = await getPosts(page, limit);
       showPosts(response)
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
     } finally {
       hideLoader()
     }
   }
 
+  //스크롤 제어 
   const handleScroll = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement
-
     if (total === end) {
+      //scroll event 멈춤
       window.removeEventListener('scroll', handleScroll)
       return
     }
@@ -73,6 +80,7 @@
     }
   }
 
+  //초기시작
   window.addEventListener('DOMContentLoaded', () => {
     loadPosts(currentPage, limit)
     window.addEventListener('scroll', handleScroll)
