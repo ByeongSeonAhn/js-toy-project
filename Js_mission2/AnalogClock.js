@@ -13,7 +13,6 @@ const AnalogClock = $container => {
 
   //전체 analog-clock 클래스 
   let analogCls = getAll('.analog-clock');
-  console.log(analogCls);
 
   for (let i = 0; i < analogCls.length; i++) {
     const $clock = analogCls[i];
@@ -50,18 +49,18 @@ const AnalogClock = $container => {
     function setTimeDeg() {
       const dateInfo = new Date();
 
-      //초
+      //초 degree
       const sec = dateInfo.getSeconds();
       const milsec = dateInfo.getMilliseconds();
       const secondsDegrees = sec * 6 + (milsec * 0.36 / 1000);
       secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
-      //분
+      //분 degree
       const min = dateInfo.getMinutes();
       const minsDegrees = min * 6 + (sec * 6 / 60);
       minsHand.style.transform = `rotate(${minsDegrees}deg)`;
 
-      //시간
+      //시간 degree
       const hr = dateInfo.getHours() > 12 ? dateInfo.getHours() - 12 : dateInfo.getHours();
       const hourDegrees = hr * 30 + (min * 6 / 12);
       hourHand.style.transform = `rotate(${hourDegrees}deg)`;
