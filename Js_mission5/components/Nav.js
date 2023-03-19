@@ -1,5 +1,4 @@
-// do something!
-const Nav = $container => {
+const Nav = (data) => {
     const categoryItemliTagAdd = function(parentTag, idNm, contentNm) {
         let liTag = document.createElement('li');
         liTag.classList.add('category-item');
@@ -7,6 +6,8 @@ const Nav = $container => {
         liTag.textContent = contentNm;
         parentTag.appendChild(liTag);
     }
+
+    const $container = document.getElementById('root');
 
     //step1: navigation 추가
     const navTag = document.createElement('nav');
@@ -32,7 +33,6 @@ const Nav = $container => {
     categoryItemList[0].classList.add('active');
 
     //stpe5: 선택된 ul tag 이벤트
-    console.log(categoryItemList)
     for(let i=0; i < categoryItemList.length; i++) {
         categoryItemList[i].addEventListener('click', () => {
             for(let j=0; j < categoryItemList.length; j++) {
@@ -40,45 +40,11 @@ const Nav = $container => {
             }
 
             categoryItemList[i].classList.add('active');
-            //step6: newsList에 전달할 selectedId 전달
-            let selectedId = categoryItemList[i].getAttribute('id');
-            console.log("selectedId: ", selectedId)
-            return selectedId;
+            //step6: newsList에 전달할 categoryId 전달
+            data.categoryId =categoryItemList[i].getAttribute('id');
         });
     }
 }
 
-
-/**
- *
- * @param Object
- * propertyKey 1: TagNm
- * propertyKey 2: ClassName
- */
-// const addClass = function(param) {
-//     let tagNm  = param.TagNm;
-//     let clsNm  = param.ClassName;
-//     tagNm.classList.add(clsNm);
-// }
-
-/**
- *
- * @param Object
- * propertyKey 1: TagNm
- * propertyKey 2: IdName
- * propertyKey 3: IdValue
- */
-// const setId = function(param) {
-//     let tagNm  = param.TagNm;
-//     let idNm  = param.IdName;
-//     let idVal  = param.IdValue;
-//     tagNm.setAttribute(idNm,idVal);
-// }
-
-
-// let navTagParam = {
-//     TagNm : navTag,
-//     ClassName : 'category-list'
-// }
 
 export default Nav;
