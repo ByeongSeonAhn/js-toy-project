@@ -1,0 +1,14 @@
+@media (max-width: 1200px) {
+    .calendar {
+        --calendar-size: 325px;
+    }
+}
+
+:root {
+    --color-white : #FFFFFF;
+    --color-black : #000000;
+    --color-green : #2b855a;
+    --color-gray : #D8D8D8;
+    --color-red : #ff0000;
+    --color-light-brown : #bb6a27;
+}
